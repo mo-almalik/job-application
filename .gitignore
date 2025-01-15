@@ -1,0 +1,15 @@
+# server
+server/node_modules
+server/uploads
+server/.env
+server/.idea
+server/.gitignore
+
+# client
+client/node_modules
+client/.env
+client/.idea
+client/.gitignore
+
+
+/sercors

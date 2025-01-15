@@ -1,0 +1,23 @@
+@import url('https://fonts.googleapis.com/css2?family=Alexandria:wght@100..900&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html,body{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Alexandria', sans-serif ;
+}
+
+
+
+/* ant design Table */
+.ant-table-thead .ant-table-cell{
+   @apply  text-[16px] font-medium !important;
+ 
+}
+
+.ant-table-tbody .ant-table-cell{
+   @apply  text-sm font-normal !important;
+}
