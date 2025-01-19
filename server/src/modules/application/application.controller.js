@@ -74,7 +74,8 @@ export const getAllApplication = catchError(async (req,res)=>{
 
 //get application by id =>employee or seeker
 export const getMyApplication = catchError(async (req,res)=>{
-    const {page=1 ,
+    const {
+        page=1 ,
         limit = 12 ,
         sortBy = "createdAt",
         order = "desc",
@@ -191,7 +192,7 @@ export const getAllApplicationByUserLoggedIn = catchError(async (req, res) => {
 
         }),({
             path:"seekerId",
-            select: "skills experiences education name username"
+            select: "skills experiences education name username profileImage"
         })],
         select: '-updatedAt ',
     };

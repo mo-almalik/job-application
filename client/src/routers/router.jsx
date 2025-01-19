@@ -12,7 +12,8 @@ import CompanyDetails from "../pages/seeker/CompanyDetails";
 import EmployerLayout from "../layout/EmployerLayout";
 import EmployerHome from "../pages/employer/EmployerHome";
 import JobEmployer from "../pages/employer/Job";
-
+import EmployerJobDetails from "../pages/employer/JobDetails"
+import Emp_Candidates from "../pages/employer/Candidates";
 const Routers = createBrowserRouter([
   {
     path: '/',
@@ -46,7 +47,8 @@ const Routers = createBrowserRouter([
     children: [
       { index: true, element: <EmployerHome /> },
       { path: 'jobs', element: <JobEmployer /> },
-      // { path: '/dashboard/candidates', element: <AdminHome /> },
+      { path: 'job/:id', element: <EmployerJobDetails /> },
+      { path: '/dashboard/candidates', element: <Emp_Candidates /> },
       // { path: '/dashboard/company', element: <AdminHome /> },
       // { path: '/dashboard/settings', element: <AdminHome /> },
     ]

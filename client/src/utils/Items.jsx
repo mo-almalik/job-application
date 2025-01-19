@@ -12,7 +12,7 @@ export const EmployerItems =[
         icon:<BriefcaseBusiness size={20} />
     },
     {
-        title:'المتقدمون',
+        title:'طلبات التقديم',
         path:'candidates',
         icon:<Handshake size={20} />
     },

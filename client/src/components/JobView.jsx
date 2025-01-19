@@ -2,9 +2,10 @@ import React from 'react';
 import { Dropdown, Table, Skeleton, Empty, Button } from 'antd';
 import dayjs from 'dayjs';
 import { ChevronLeft, ChevronRight, CircleX, Copy, EllipsisVertical, Eye } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 function JobView({ items, isLoading ,handlePage,total}) {
-    const actionClick = [
+    const getActionClick = (item) => [
         {
             label: (
                 <button className='p-1 w-full justify-end flex-row-reverse px-5 flex items-center gap-x-2 rounded-md text-[14px] text-gray-500 hover:text-gray-800 hover:bg-gray-100 my-1'>
@@ -16,10 +17,12 @@ function JobView({ items, isLoading ,handlePage,total}) {
         },
         {
             label: (
-                <button className='p-1 w-full justify-end flex-row-reverse px-5 flex items-center gap-x-2 rounded-md text-[14px] text-gray-500 hover:text-gray-800 hover:bg-gray-100 my-1'>
-                    <span>التفاصيل</span>
-                    <span><Eye size={15} /></span>
-                </button>
+                <Link to={`/dashboard/job/${item._id}`}>  
+                    <button className='p-1 w-full justify-end flex-row-reverse px-5 flex items-center gap-x-2 rounded-md text-[14px] text-gray-500 hover:text-gray-800 hover:bg-gray-100 my-1'>
+                        <span>التفاصيل</span>
+                        <span><Eye size={15} /></span>
+                    </button>
+                </Link>
             ),
             key: '2',
         },
@@ -70,8 +73,8 @@ function JobView({ items, isLoading ,handlePage,total}) {
                 <Dropdown
                     placement='bottom'
                     menu={{
-                        items: actionClick,
-                    }}
+                    items: getActionClick(item),
+                }}
                     trigger={['click']}
                 >
                     <button className='bg-gray-200 p-2 rounded-md'>

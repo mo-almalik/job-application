@@ -17,7 +17,24 @@ export const applicationSlice = createApi({
         body: formData,
       }),
     }),
+
+    // get application by jobId
+    getApplicationByJobId: builder.query({
+      query: (jobId) => `/application/${jobId}`,
+    }),
+
+
+    // get applications by user logged employee
+    getApplicationsToEmp: builder.query({
+      query: ({page=1,limit=12,search}) =>{
+        const params = new URLSearchParams({ page, limit })
+        if(search){
+          params.append('search', search)
+        }
+        return  `/application/all-app?${params.toString()}`
+      },
+    }),
   }),
 });
 
-export const { useApplyJobMutation } = applicationSlice;
+export const { useApplyJobMutation ,useGetApplicationByJobIdQuery,useGetApplicationsToEmpQuery } = applicationSlice;
