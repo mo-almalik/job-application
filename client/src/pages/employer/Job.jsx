@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { Helmet } from 'react-helmet-async'
 import JobView from '../../components/JobView'
 import { useGetMyjobQuery } from '../../features/jobSlice'
+import Title from '../../components/Title';
 
 
 function Job() {
@@ -18,11 +19,9 @@ function Job() {
  console.log(data?.data);
  
   return <>
-    <Helmet>
-        <title>الوظائف</title>
-    </Helmet>
+    
     <div>
-        <h2>الوظائف</h2>
+         <Title title={'الوظائف'}/>
 
         <div className='my-5'>
         

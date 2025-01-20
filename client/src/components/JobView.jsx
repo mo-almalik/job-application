@@ -114,7 +114,7 @@ function JobView({ items, isLoading ,handlePage,total}) {
                     pageSizeOptions: ['5', '10', '20','30','40'],
                     nextIcon: <ChevronLeft />,
                     prevIcon: <ChevronRight />,
- 
+                    size:'small',
                 }}
 
             />

@@ -241,18 +241,15 @@ export const getAllApplicationByJobId = catchError(async (req, res) => {
                 path: "seekerId",
                 select: "name skills experiences education",
             }),
-            ({
-                path:'jobId',
-                select: "title"
-            })
+
         ],
-        select: "-updatedAt",
+        select: "-updatedAt -jobId",
     };
 
     const applications = await Application.paginate(filters, options);
 
-    res.status(200).json({
-        success: true,
+    res.json({
+       job,
         data: applications,
     });
 });
