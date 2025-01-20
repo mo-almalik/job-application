@@ -4,6 +4,7 @@ import { Helmet } from 'react-helmet-async'
 import { Avatar, Card, Table } from 'antd'
 import MyTable from '../../components/MyTable';
 import dayjs from 'dayjs';
+import Title from '../../components/Title';
 
 function Candidates() {
     const baseUrl = import.meta.env.VITE_BASE;
@@ -66,9 +67,8 @@ const dataSource = applications?.map((el)=>({
  
 }))
   return <>
-    <Helmet>
-        <title>طلبات التقديم</title>
-    </Helmet>
+ 
+    <Title title={'طلبات التقديم'} />
 
     <div className='w-full'>
  
