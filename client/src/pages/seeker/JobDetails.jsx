@@ -38,7 +38,7 @@ function JobDetails() {
     </Helmet>
 
 
-     <div className='bg-gray-100 p-3 '>
+     <div className='bg-gray-100 p-3 my-8'>
      <Breadcrumb items={[
         {title: 'الرئيسية' , href:'/'},
         {title: 'وظائف', href:'/jobs'},

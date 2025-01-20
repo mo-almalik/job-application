@@ -30,7 +30,7 @@ const Navbar = () => {
         {name: '',path:'/favorites'},
     ]
     return <>
-        <div className={'bg-gray-100   py-5 '}>
+        <div className={'bg-white   py-5 '}>
 
         <nav className={'container mx-auto '}>
             <div className='flex justify-between items-center'>

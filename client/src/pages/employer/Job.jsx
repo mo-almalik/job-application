@@ -15,7 +15,8 @@ function Job() {
 };
 
   const totalDocs = data?.data?.totalDocs
-
+ console.log(data?.data);
+ 
   return <>
     <Helmet>
         <title>الوظائف</title>

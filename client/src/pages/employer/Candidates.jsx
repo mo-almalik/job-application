@@ -54,6 +54,7 @@ function Candidates() {
     },
 
 ];
+ 
 
 const dataSource = applications?.map((el)=>({
     avatar:<Avatar src={`${baseUrl}/${el.seekerId?.profileImage}`} alt={el.seekerId.name} size={50}/>,
@@ -71,7 +72,14 @@ const dataSource = applications?.map((el)=>({
 
     <div className='w-full'>
  
-            <MyTable   handlePage={handlePage} total={totalDocs} columns={columns} dataSource={dataSource} isLoading={isLoading} />
+            <MyTable
+             handlePage={handlePage}
+              total={totalDocs}
+               columns={columns}
+                dataSource={dataSource}
+                 isLoading={isLoading}
+                 description={' لاتوجد طلبات تقديم حاليا'}
+                  />
     
     </div>
   </>
