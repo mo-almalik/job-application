@@ -84,6 +84,7 @@ export const getAllJob = catchError(async (req, res) => {
         data: jobs,
     });
 });
+
 //get job by company id
 export const getJobsByCompanyId = catchError(async (req, res) => {
     const {  page = 1, limit = 12 } = req.query;

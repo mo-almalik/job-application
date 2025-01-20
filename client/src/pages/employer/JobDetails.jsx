@@ -8,14 +8,30 @@ function JobDetails() {
     const {id} = useParams()
     const {data,isLoading,isError,error} = useGetApplicationByJobIdQuery(id)
     const details = data?.data
+    const job = data?.job
+    console.log(job);
     console.log(details);
     
 
     
   return <>
     <div>
-       <Title title={details?.title} />
+       <Title title={job?.title} />
+       <div>
+        {/* company */}
+       </div>
     </div>
+
+      <div className='flex flex-col space-y-8 '>
+        <div className='mt-5'>
+            <h3>الوصف</h3>
+            <p>{job?.description}</p>
+        </div>
+        <div>
+            <h3>المتطلبات</h3>
+            <p>{job?.requirements}</p>
+        </div>
+      </div>
   </>
 }
 
