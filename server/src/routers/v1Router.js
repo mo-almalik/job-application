@@ -8,7 +8,7 @@ import applicationRouter from "../modules/application/application.router.js";
 const router = Router();
 
 router.use('/application',applicationRouter)
-router.use('/company',companyRouter)
+router.use('/companies',companyRouter)
 router.use('/auth',authRouter)
 router.use('/user',userRouter)
 router.use('/job',jobRouter)
