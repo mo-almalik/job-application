@@ -9,8 +9,8 @@ function JobDetails() {
     const {data,isLoading,isError,error} = useGetApplicationByJobIdQuery(id)
     const details = data?.data
     const job = data?.job
-    console.log(job);
-    console.log(details);
+    // console.log(job);
+    // console.log(details);
     
 
     

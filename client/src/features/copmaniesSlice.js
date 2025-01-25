@@ -8,7 +8,7 @@ const baseQuery = fetchBaseQuery({
 })
 
 export const copmaniesSlice = createApi({
-    reducerPath: 'company',
+    reducerPath: 'copmaniesSlice',
     baseQuery,
     tagTypes:['Companies'],
     endpoints: (builder) => ({
@@ -18,6 +18,17 @@ export const copmaniesSlice = createApi({
         getCompanies: builder.query({
             query: () => '/companies',
         }),
+        // get my company
+        getMyCompany:builder.query({
+            query: () => '/companies/myCompany',
+        })
     }),
     
 })
+
+
+export const {
+    useGetCompanyQuery,
+    useGetCompaniesQuery,
+    useGetMyCompanyQuery,
+} = copmaniesSlice
