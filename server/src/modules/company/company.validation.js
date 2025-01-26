@@ -7,6 +7,7 @@ export const addCompanySchema = Joi.object({
     contactInfo: Joi.object({
         email: Joi.string().email().allow(null, ''),
         website: Joi.string().allow(null, ''),
+        phone: Joi.string().allow(null, ''),
     }).allow(null, {})
 })
 
@@ -17,6 +18,7 @@ export const updateCompanySchema = Joi.object({
     contactInfo: Joi.object({
         email: Joi.string().email().allow(null, ''),
         website: Joi.string().allow(null, ''),
+        phone: Joi.string().allow(null, ''),
     }).allow(null, {}),
     id:Joi.string().hex().length(24).required()
 })

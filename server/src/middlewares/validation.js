@@ -9,10 +9,10 @@ export const validate = (schema) => {
         const { details } = error;
   
         const messages = details.map(i => i.message.replace(/["/]/g, '')); 
-        if(req.file || req.files){
-          fs.unlinkSync(req.file.path || req.files.path);
+        // if(req.file || req.files){
+        //   fs.unlinkSync(req.file.path || req.files.path);
 
-        }
+        // }
         next(new AppError(messages.join(', '), 403));
       } else {
         next();

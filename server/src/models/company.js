@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import fs from 'fs';  
 
 const companySchema = new mongoose.Schema({
     name: {
@@ -33,33 +34,15 @@ const companySchema = new mongoose.Schema({
        website:{
          type: String,
        },
+       phone:{
+         type: String,
+         match: [/^\d{10}$/, "رقم الهاتف يجب أن يتكون من 10 أرقام"],
+       }
     },
 },{
     timestamps: true,
 })
-companySchema.post(['find', 'findOne'], function (docs, next) {
-    if (!docs) return next(); 
 
-    const baseUrl = process.env.HOST; 
 
-    const formatUrl = (url) => {
-        if (!url) return url; 
-        if (url.startsWith('http://') || url.startsWith('https://')) {
-            return url; 
-        }
-        return `${baseUrl}/${url.replace(/\\/g, '/')}`; 
-    };
 
-    if (Array.isArray(docs)) {
-        for (let i = 0; i < docs.length; i++) {
-            if (docs[i].logo) docs[i].logo = formatUrl(docs[i].logo);
-            if (docs[i].cover) docs[i].cover = formatUrl(docs[i].cover);
-        }
-    } else if (docs) {
-        if (docs.logo) docs.logo = formatUrl(docs.logo);
-        if (docs.cover) docs.cover = formatUrl(docs.cover);
-    }
-
-    next();
-});
-export const Company = mongoose.model("Company", companySchema)
+export const Company = mongoose.model("Company", companySchema);

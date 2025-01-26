@@ -1,6 +1,8 @@
-import fs from "fs"
+import fs from 'fs/promises';
 import { catchError, AppError } from "../../../utils/error.js"
 import {Company} from "../../models/company.js";
+import { Application } from '../../models/application.js';
+import Job from "../../models/job.js";
 
 
 // create new company
@@ -9,6 +11,7 @@ export const createNewCompany = catchError(async (req, res) => {
 try{
     req.body.employeesId = req.user.id;
 
+    
     if (!req.files.logo){
         return res.status(400).json({
             message :'شعار الشركة مطلوب'
@@ -25,6 +28,7 @@ try{
 
     await Company.create(req.body);
     res.status(201).json({
+        status:"success",
         message: 'تم انشاء ملف الشركة بنجاح',
     });
 
@@ -70,37 +74,86 @@ export const updateCompany = catchError(async (req, res) => {
     });
 });
 
-// delete company
-export const deleteCompany = catchError(async (req,res)=>{
-    const employeesId = req.user.id
-    const id = req.params.id
-    const company = await Company.findById(id)
+export const deleteCompany = catchError(async (req, res) => {
+    const employeesId = req.user.id; 
+    const id = req.params.id; 
 
-    if(!company || employeesId !== company.employeesId.toString()){
+
+    const company = await Company.findById(id);
+
+  
+    if (!company || employeesId !== company.employeesId.toString()) {
         return res.status(400).json({
             message: 'الشركة غير موجودة أو ليس لديك الصلاحية لحذفها',
-        })
+        });
     }
 
-    if (company && employeesId === company.employeesId.toString()){
-        if (company.logo ){
-            fs.unlinkSync(company.logo)
-        }if (company.cover ){
-            fs.unlinkSync(company.cover)
+
+    if (company.logo) {
+        try {
+            await fs.unlink(company.logo); 
+        } catch (error) {
+            
+            throw new Error(
+                `حدث خطأ أثناء حذف الملف الشعاري للشركة: ${company.logo}`,
+                error
+            )
+
         }
-        await Company.findByIdAndDelete(id)
-        return res.status(200).json({
-            message: ` تم حذف الشركة: ${company.name}`,
-        })
+    }
+    if (company.cover) {
+        try {
+            await fs.unlink(company.cover); 
+        } catch (error) {
+            
+            throw new Error(
+                `حدث خطأ أثناء حذف الملف الغلافي للشركة: ${company.cover}`,
+                error
+            )
+        }
     }
 
-})
+   
+    const jobs = await Job.find({ companyId: company._id });
+
+    
+    for (const job of jobs) {
+        const applications = await Application.find({ jobId: job._id });
+
+      
+        for (const application of applications) {
+            if (application.resume) {
+                try {
+                    await fs.unlink(application.resume); 
+                } catch (error) {
+                    throw new Error(
+                        `حدث خطأ أثناء حذف الملف التعريفي للطلب: ${application.resume}`,
+                        error
+                    )
+                  
+                }
+            }
+        }
 
 
+        await Application.deleteMany({ jobId: job._id });
+    }
+
+   
+    await Job.deleteMany({ companyId: company._id });
+
+
+    await Company.findByIdAndDelete(id);
+
+    return res.json({
+        status: "success",
+        message: `تم حذف الشركة: ${company.name}`,
+    });
+});
 // get all company
 export const getAllCompany= catchError(async (req,res)=>{
     const company = await Company.find().select('-employeesId')
-    res.status(200).json({
+    res.json({
         data: company,
     })
 })
@@ -114,7 +167,7 @@ export const getCompanyById= catchError(async (req,res)=>{
             message:"لم يتم العثور علي الشركة"
         })
     }
-    res.status(200).json({
+    res.json({
         data: company,
     })
 })
@@ -127,7 +180,7 @@ export const getNyCompany= catchError(async (req,res)=>{
             message:"لم يتم العثور علي الشركة"
         })
     }
-    res.status(200).json({
+    res.json({
         data: company,
     })
 })

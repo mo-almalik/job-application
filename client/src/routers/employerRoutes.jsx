@@ -8,6 +8,7 @@ import { Role } from "../utils/enum";
 import NotFound from "../components/NotFound";
 import Copmanies from "../pages/employer/copmanies/copmanies";
 import CompanyPage from "../pages/employer/copmanies/CompanyPage";
+import AddCompany from "../pages/employer/copmanies/AddCompany";
 
 const employerRoutes = [
   {
@@ -20,6 +21,7 @@ const employerRoutes = [
       { path: 'jobs', element: <JobEmployer /> },
       { path: 'job/:id', element: <EmployerJobDetails /> },
       { path: 'candidates', element: <Emp_Candidates /> },
+      { path: 'add-company', element: <AddCompany /> },
       { path: 'candidates', element: <Emp_Candidates /> },
       { path: 'copmanies', element: <Copmanies /> },
       { path: 'company-profile/:id', element: <CompanyPage /> },
